@@ -5,8 +5,8 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 configure do 
-	@db = SQLite3::Database.new 'barbershop.db'
-	@db.execute 'CREATE TABLE if not exists 
+	db = SQLite3::Database.new 'barbershop.db'
+	db.execute 'CREATE TABLE if not exists 
 		"Users" 
 		(
 			"id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,18 +60,27 @@ post '/visit' do
 	end
 	
 	
+
+
+
+	db = get_db
+	db.execute 'insert into 
+	Users 
+	(
+		username, 
+		phone, 
+		datestamp, 
+		barber, 
+		color
+	)
+	values(?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+
 	if err.length == 0
 		erb "User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime}, Color: #{@color} \n"
 	else
 		@error = "Введите:  #{err.join(', ')}"
 		erb :visit
 	end
-	#f = File.open "public/users.txt", "a"
-	#f.write "User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime} \n"
-	#f.close
-
-	#erb "User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime}, Color: #{@color} \n"
-	
 
 end
 
@@ -86,4 +95,8 @@ post '/contacts' do
 
 
 	erb :contacts
+end
+
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
 end
