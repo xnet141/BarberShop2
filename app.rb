@@ -42,27 +42,8 @@ post '/visit' do
 	@datetime = params[:datetime]
 	@barber = params[:barber]
 	@color = params[:color]
-	
-	hh = {
-		'Имя пользователя' => @username, 
-		:phone => @phone, 
-		:datetime => @datetime, 
-		:barber => @barber, 
-		:color => @color
-	}
-	
-	err = []
-	
-	hh.keys.each do |key|
-		if  hh[key] == '' || hh[key] == '#7bd148'
-			err << key
-		end
-	end
-	
-	
-
-
-
+		
+		
 	db = get_db
 	db.execute 'insert into 
 	Users 
@@ -74,6 +55,24 @@ post '/visit' do
 		color
 	)
 	values(?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
+
+
+
+	hh = {
+		'Имя пользователя' => @username, 
+		:phone => @phone, 
+		:datetime => @datetime, 
+		:barber => @barber, 
+		:color => @color
+	}
+
+	err = []
+	
+	hh.keys.each do |key|
+		if  hh[key] == '' || hh[key] == '#7bd148'
+			err << key
+		end
+	end
 
 	if err.length == 0
 		erb "User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime}, Color: #{@color} \n"
@@ -95,6 +94,10 @@ post '/contacts' do
 
 
 	erb :contacts
+end
+
+get '/showusers' do
+  "Hello World"
 end
 
 def get_db
