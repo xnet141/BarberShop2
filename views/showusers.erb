@@ -1,14 +1,14 @@
 <div class="bd-example">
-  <table class="table">
+  <table class="table table-striped">
 
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">username</th>
-        <th scope="col">phone</th>
-        <th scope="col">datestamp</th>
-        <th scope="col">barber</th>
-        <th scope="col">color</th>
+        <th>#</th>
+        <th>username</th>
+        <th>phone</th>
+        <th>datestamp</th>
+        <th>barber</th>
+        <th>color</th>
       </tr>
     </thead>
 
@@ -17,9 +17,9 @@
       <% @arr.each do |row| %>      
       <% @i += 1 %>
         <tr>
-          <th scope='row'><%= @i %></th>       
+          <th><%= @i %></th>       
           <td><%= row['username'] %></td>
-          <%= "<td> #{row['phone']} </td>" %> # можно так
+          <%= "<td> #{row['phone']} </td>" %>  <%# можно так %>
           <td><%= row['datestamp'] %></td>
           <td><%= row['barber'] %></td>
           <td><%= row['color'] %></td>
