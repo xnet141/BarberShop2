@@ -4,6 +4,10 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+def get_db
+	return SQLite3::Database.new 'barbershop.db'
+end
+
 configure do 
 	db = SQLite3::Database.new 'barbershop.db'
 	db.execute 'CREATE TABLE if not exists 
@@ -100,6 +104,3 @@ get '/showusers' do
   "Hello World"
 end
 
-def get_db
-	return SQLite3::Database.new 'barbershop.db'
-end
