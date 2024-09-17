@@ -1,33 +1,33 @@
 <div class="bd-example">
   <table class="table">
+
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">username</th>
+        <th scope="col">phone</th>
+        <th scope="col">datestamp</th>
+        <th scope="col">barber</th>
+        <th scope="col">color</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <%# <td>Alex Genius</td> %>
-        <td>@twitter</td>
-      </tr>
+      <% @i = 0 %>
+      <% @arr.each do |row| %>      
+      <% @i += 1 %>
+        <tr>
+          <th scope='row'><%= @i %></th>       
+          <td><%= row['username'] %></td>
+          <%= "<td> #{row['phone']} </td>" %> # можно так
+          <td><%= row['datestamp'] %></td>
+          <td><%= row['barber'] %></td>
+          <td><%= row['color'] %></td>
+        </tr>
+      <% end %>
     </tbody>
 
   </table>
 </div>
+
+<%# scope="row" %>
