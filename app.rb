@@ -101,6 +101,6 @@ post '/contacts' do
 end
 
 get '/showusers' do
-  "Hello World"
+	erb :showusers
 end
 
