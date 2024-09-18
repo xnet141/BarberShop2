@@ -112,7 +112,7 @@ post '/visit' do
 	end
 
 	if err.length == 0
-		erb "User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime}, Color: #{@color} \n"
+		erb "<h2>Спасибо вы записались</h2><h1>User: #{@username}, Phone: #{@phone}, barber: #{@barber}, Date, time: #{@datetime}, Color: #{@color}</h1> \n "
 	else
 		@error = "Введите:  #{err.join(', ')}"
 		erb :visit
