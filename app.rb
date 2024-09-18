@@ -5,12 +5,16 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def get_db
-	return SQLite3::Database.new 'barbershop.db'
+	db = SQLite3::Database.new 'barbershop.db'
+	db.results_as_hash = true
+	return db
 end
+
 
 def is_barber_exists? db, name
 	db.execute('select * from Barbers where barber=?', [name]).length > 0	
 end
+
 
 def seed_db db, barbers
 	barbers.each do |barber_new|
@@ -19,6 +23,13 @@ def seed_db db, barbers
 		end
 	end	
 end
+
+
+before do
+	db = get_db
+	@barbers = db.execute 'select * from Barbers order by id desc'
+end
+	
 
 configure do 
 	db = SQLite3::Database.new 'barbershop.db'
@@ -57,6 +68,7 @@ get '/contacts' do
 end
 
 get '/visit' do
+	
 	erb :visit
 end
 
@@ -81,7 +93,7 @@ post '/visit' do
 	)
 	values(?, ?, ?, ?, ?)', [@username, @phone, @datetime, @barber, @color]
 
-
+	
 
 	hh = {
 		'Имя пользователя' => @username, 

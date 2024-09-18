@@ -30,9 +30,10 @@
   <div class="form-group">
     <label>Выберите парикмахера  :</label>
     <select name="barber" class="form-control" aria-label="Large select example" >
-      <option <%= @barber == 'Walter White' ? 'selected' : '' %>>Walter White</option>
-      <option <%= @barber == 'Jessie Pinkman' ? 'selected' : '' %>>Jessie Pinkman</option>
-      <option <%= @barber == 'Gus Fring' ? 'selected' : '' %>>Gus Fring</option>
+      <% @barbers.each do |item| %>
+       
+        <option  <%= @barber == item['barber'] ? 'selected' : '' %>><%= item['barber'] %></option> 
+      <% end %>
     </select>
   </div>
 
